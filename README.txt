@@ -131,3 +131,6 @@ Database schema is managed via EF Core migrations.
 Initial sample data can be seeded using a seeder class (optional).
 
 Swagger provides interactive API testing.
+
+Additionally you can run the system locally so by opening the project with visual studion code and run dotnet run command on the terminal
+or you can click run on the http green play button
