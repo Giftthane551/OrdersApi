@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16
+    container_name: ordersapi_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: OrdersDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ordersdb_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ordersapi_api
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=OrdersDb;Username=postgres;Password=postgres"
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+
+volumes:
+  ordersdb_data:
